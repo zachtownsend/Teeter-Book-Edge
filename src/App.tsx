@@ -22,6 +22,15 @@ function App() {
   });
   const applications = data?.pages.flatMap((page) => page.data) ?? [];
 
+  useEffect(() => {
+    if (!isLoading && applications.length > 0) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [isLoading, applications.length]);
+
   return (
     <div className="App">
       <Header />
