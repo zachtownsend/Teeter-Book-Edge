@@ -1,12 +1,17 @@
 import React from "react";
 import styles from "./SingleApplication.module.css";
 import { ISingleApplication } from "./types";
+import formatDate from "./utils/formatDate";
+import formatCurrency from "./utils/formatCurrency";
 
 const SingleApplication = ({
   application,
 }: {
   application: ISingleApplication;
 }) => {
+  const formattedDateCreated = formatDate(new Date(application.date_created));
+  const formattedExpiryDate = formatDate(new Date(application.expiry_date));
+  const formattedLoanAmount = formatCurrency(application.loan_amount);
   return (
     <div className={styles.SingleApplication}>
       <div className={styles.cell}>
@@ -23,15 +28,15 @@ const SingleApplication = ({
       </div>
       <div className={styles.cell}>
         <sub>Loan Amount</sub>
-        {application.loan_amount}
+        {formattedLoanAmount}
       </div>
       <div className={styles.cell}>
         <sub>Application Date</sub>
-        {application.date_created}
+        {formattedDateCreated}
       </div>
       <div className={styles.cell}>
         <sub>Expiry date</sub>
-        {application.expiry_date}
+        {formattedExpiryDate}
       </div>
     </div>
   );

@@ -29,10 +29,10 @@ function App() {
       <div className="load-more-container">
         <Button
           className="load-more-button"
-          disabled={isFetchingNextPage}
+          disabled={isFetchingNextPage || !hasNextPage}
           onClick={() => fetchNextPage()}
         >
-          Load More
+          {isFetchingNextPage ? "Loading..." : "Load More"}
         </Button>
       </div>
     </div>

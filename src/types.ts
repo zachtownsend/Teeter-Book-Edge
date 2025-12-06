@@ -21,8 +21,8 @@ export interface ISingleApplication {
   loan_type: TLoanType;
   email: string;
   company: string;
-  date_created: Date;
-  expiry_date: Date;
+  date_created: string;
+  expiry_date: string;
   avatar: string;
   loan_history: ILoanHistory[];
 }
