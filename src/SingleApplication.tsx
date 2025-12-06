@@ -32,15 +32,15 @@ const SingleApplication = ({
           {application.email}
         </a>
       </div>
-      <div className={styles.cell}>
+      <div className={`${styles.cell} ${styles.alignEnd}`}>
         <sub>Loan Amount</sub>
         {formattedLoanAmount}
       </div>
-      <div className={styles.cell}>
+      <div className={`${styles.cell} ${styles.alignEnd}`}>
         <sub>Application Date</sub>
         {formattedDateCreated}
       </div>
-      <div className={styles.cell}>
+      <div className={`${styles.cell} ${styles.alignEnd}`}>
         <sub>Expiry date</sub>
         {formattedExpiryDate}
       </div>

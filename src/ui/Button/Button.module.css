@@ -3,6 +3,7 @@
   border: 2px solid transparent;
   line-height: 24px;
   border-radius: 8px;
+  font-size: 1rem;
   color: var(--color-white-100);
   font-weight: bold;
   padding: 8px 24px;
