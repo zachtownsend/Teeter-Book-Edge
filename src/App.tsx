@@ -1,7 +1,7 @@
 import "./App.css";
 import Applications from "./Applications";
 import Header from "./Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useApplications from "./utils/useApplications";
 import { PAGE_LIMIT } from "./consts";
 import { Button } from "./ui/Button/Button";
@@ -35,6 +35,7 @@ function App() {
     <div className="App">
       <Header />
       <Applications applications={applications ?? []} />
+
       <div className="load-more-container">
         <Button
           className="load-more-button"

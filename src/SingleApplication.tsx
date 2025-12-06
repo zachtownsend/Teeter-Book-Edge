@@ -24,7 +24,13 @@ const SingleApplication = ({
       </div>
       <div className={styles.cell}>
         <sub>Email</sub>
-        {application.email}
+        <a
+          href={`mailto:${application.email}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {application.email}
+        </a>
       </div>
       <div className={styles.cell}>
         <sub>Loan Amount</sub>

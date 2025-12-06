@@ -32,3 +32,18 @@
     transform: rotate(360deg);
   }
 }
+
+.load-more-container {
+  text-align: center;
+  margin-top: 42px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 79px;
+}
+
+.load-more-button {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
