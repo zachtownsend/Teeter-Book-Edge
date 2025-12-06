@@ -4,18 +4,37 @@ import Header from "./Header";
 import { useState } from "react";
 import useApplications from "./utils/useApplications";
 import { PAGE_LIMIT } from "./consts";
+import { Button } from "./ui/Button/Button";
 
 function App() {
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError, isFetching } = useApplications({
-    page,
+
+  const {
+    data,
+    isLoading,
+    isError,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useApplications({
+    page: page,
     limit: PAGE_LIMIT,
   });
+  const applications = data?.pages.flatMap((page) => page.data) ?? [];
 
   return (
     <div className="App">
       <Header />
-      <Applications applications={data ?? []} />
+      <Applications applications={applications ?? []} />
+      <div className="load-more-container">
+        <Button
+          className="load-more-button"
+          disabled={isFetchingNextPage}
+          onClick={() => fetchNextPage()}
+        >
+          Load More
+        </Button>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { ISingleApplication } from "../types";
+import parseLinkHeaders from "./parseLinkHeaders";
 
 interface FetchApplicationsParams {
   page: number;
@@ -16,13 +17,43 @@ const fetchApplications = async ({ page, limit }: FetchApplicationsParams) => {
     throw new Error("Failed to fetch applications");
   }
 
-  return response.json();
+  const data = await response.json();
+
+  const linkHeader = response.headers.get("Link");
+  let nextPage: number | undefined;
+
+  if (linkHeader) {
+    const links = parseLinkHeaders(linkHeader);
+
+    const nextLink = links.find((l) => l.rel === "next");
+    if (nextLink) {
+      // Extract page number from URL
+      const url = new URL(nextLink.url);
+      nextPage = parseInt(url.searchParams.get("_page") || "");
+    }
+  } else {
+    // Fallback: check if we got a full page
+    const hasMore = data.length === limit;
+    nextPage = hasMore ? page + 1 : undefined;
+  }
+
+  return {
+    data,
+    nextPage,
+  };
 };
 
 const useApplications = ({ page, limit }: FetchApplicationsParams) => {
-  return useQuery<ISingleApplication[]>({
-    queryKey: ["applications", page],
-    queryFn: () => fetchApplications({ page, limit }),
+  return useInfiniteQuery<
+    { data: ISingleApplication[]; nextPage?: number },
+    Error,
+    { pages: Array<{ data: ISingleApplication[]; nextPage?: number }> }
+  >({
+    queryKey: ["applications", String(page)],
+    queryFn: ({ pageParam }) =>
+      fetchApplications({ page: Number(pageParam), limit }),
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    initialPageParam: 1,
   });
 };
 
