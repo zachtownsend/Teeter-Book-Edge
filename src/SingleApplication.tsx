@@ -1,7 +1,12 @@
 import React from "react";
 import styles from "./SingleApplication.module.css";
+import { ISingleApplication } from "./types";
 
-const SingleApplication = ({ application }) => {
+const SingleApplication = ({
+  application,
+}: {
+  application: ISingleApplication;
+}) => {
   return (
     <div className={styles.SingleApplication}>
       <div className={styles.cell}>
