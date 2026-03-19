@@ -9,6 +9,7 @@ import {
 } from "react-hook-form";
 import { Button } from "../ui/Button/Button";
 import styles from "./CreateApplicationForm.module.css";
+import useCreateApplication from "../utils/useCreateApplication";
 
 const ERROR_REQUIRED = "Required";
 const ERROR_MIN_AMOUNT = "Min. Amount >= 1000";
@@ -23,7 +24,10 @@ type TFormValues = {
 
 export const CreateApplicationForm = () => {
   const methods = useForm<TFormValues>();
-  const onSubmit = (values: TFormValues) => console.log("SUBMIT", values);
+  const { mutateAsync: createApplication } = useCreateApplication();
+  const onSubmit = async (values: TFormValues) => {
+    await createApplication(values);
+  };
 
   return (
     <FormProvider {...methods}>

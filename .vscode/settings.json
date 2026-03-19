@@ -1,0 +1,10 @@
+{
+  "debug.javascript.autoAttachFilter": "smart",
+  "debug.javascript.breakOnConditionalError": true,
+  "debug.javascript.unmapMissingSources": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "vitest.enable": true,
+  "vitest.commandLine": "npm run test"
+}
+

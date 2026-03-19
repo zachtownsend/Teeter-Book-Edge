@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import useApplications from "./utils/useApplications";
 import { PAGE_LIMIT } from "./consts";
 import { Button } from "./ui/Button/Button";
+import { CreateApplicationForm } from "./CreateApplicationForm/CreateApplicationForm";
 
 function App() {
   const [page, setPage] = useState(1);
@@ -34,6 +35,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <CreateApplicationForm />
       <Applications applications={applications ?? []} />
 
       <div className="load-more-container">

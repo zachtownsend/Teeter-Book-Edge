@@ -53,7 +53,7 @@ const useApplications = ({ page, limit }: FetchApplicationsParams) => {
     queryFn: ({ pageParam }) =>
       fetchApplications({ page: Number(pageParam), limit }),
     getNextPageParam: (lastPage) => lastPage.nextPage,
-    initialPageParam: 1,
+    initialPageParam: 21,
   });
 };
 
